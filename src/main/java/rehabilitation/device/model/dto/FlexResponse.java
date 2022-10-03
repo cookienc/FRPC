@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class FlexResponse {
+	private Long id;
 	private Integer thumb;
 	private Integer indexFinger;
 	private Integer middleFinger;
@@ -15,7 +16,8 @@ public class FlexResponse {
 	private LocalDateTime date;
 
 	@Builder
-	public FlexResponse(Integer thumb, Integer indexFinger, Integer middleFinger, Integer ringFinger, Integer littleFinger, LocalDateTime date) {
+	public FlexResponse(Long id, Integer thumb, Integer indexFinger, Integer middleFinger, Integer ringFinger, Integer littleFinger, LocalDateTime date) {
+		this.id = id;
 		this.thumb = thumb;
 		this.indexFinger = indexFinger;
 		this.middleFinger = middleFinger;

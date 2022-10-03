@@ -54,7 +54,6 @@ class DeviceAcceptanceTest {
 		deviceService.savePressure(pressure);
 
 		//when
-
 		ExtractableResponse<Response> 응답 = RestAssured.given().log().all()
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.when()

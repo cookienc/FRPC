@@ -8,6 +8,7 @@ import rehabilitation.device.model.dto.PressureResponse;
 public class SensorBarGraphConverter {
 	public static FlexResponse toFlexRes(Flex flex) {
 		return FlexResponse.builder()
+				.id(flex.getId())
 				.thumb(flex.getThumb())
 				.indexFinger(flex.getIndexFinger())
 				.middleFinger(flex.getMiddleFinger())
@@ -19,6 +20,7 @@ public class SensorBarGraphConverter {
 
 	public static PressureResponse toPressureRes(Pressure pressure) {
 		return PressureResponse.builder()
+				.id(pressure.getId())
 				.thumb(pressure.getThumb())
 				.indexFinger(pressure.getIndexFinger())
 				.middleFinger(pressure.getMiddleFinger())
