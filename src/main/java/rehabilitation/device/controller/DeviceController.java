@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import rehabilitation.device.model.dto.MeasureDate;
 import rehabilitation.device.model.dto.PressureResponse;
 import rehabilitation.device.model.dto.SensorBarGraphResponse;
 import rehabilitation.device.service.DeviceService;
@@ -31,5 +32,10 @@ public class DeviceController {
 	@GetMapping("/line-graph")
 	public ResponseEntity<List<PressureResponse>> getLineGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS") LocalDateTime date) {
 		return ResponseEntity.ok().body(deviceService.getLineGraph(date));
+	}
+
+	@GetMapping("/list")
+	public ResponseEntity<List<MeasureDate>> getMeasureDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS") LocalDateTime date) {
+		return ResponseEntity.ok().body(deviceService.getMeasureDate(date));
 	}
 }

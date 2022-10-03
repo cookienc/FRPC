@@ -3,10 +3,12 @@ package rehabilitation.device.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rehabilitation.device.controller.MeasureDateConverter;
 import rehabilitation.device.controller.PressureResponseConverter;
 import rehabilitation.device.model.Finger;
 import rehabilitation.device.model.Flex;
 import rehabilitation.device.model.Pressure;
+import rehabilitation.device.model.dto.MeasureDate;
 import rehabilitation.device.model.dto.PressureResponse;
 import rehabilitation.device.model.dto.SensorBarGraphResponse;
 import rehabilitation.device.repository.FlexRepository;
@@ -59,6 +61,12 @@ public class DeviceService {
 				.collect(toList());
 	}
 
+	public List<MeasureDate> getMeasureDate(LocalDateTime date) {
+		List<Pressure> pressures = pressureRepository.findByCreatedAtBetween(getStartDate(date, 0), getEndDate(date, 0));
+		List<Flex> flexes = flexRepository.findByCreatedAtBetween(getStartDate(date, 0), getEndDate(date, 0));
+		return getMeasureDates(pressures, flexes);
+	}
+
 	private void addData(List<PressureResponse> responses, List<Pressure> pressures) {
 		if (pressures.isEmpty()) {
 			return;
@@ -91,5 +99,17 @@ public class DeviceService {
 
 	private LocalDateTime getEndDate(LocalDateTime date, int before) {
 		return LocalDateTime.of(date.toLocalDate().minusDays(before), LocalTime.of(23, 59, 59));
+	}
+
+	private List<MeasureDate> getMeasureDates(List<Pressure> pressures, List<Flex> flexes) {
+		List<MeasureDate> dates = new ArrayList<>();
+
+		for (int i = 0; i < pressures.size(); i++) {
+			Pressure pressure = pressures.get(i);
+			Flex flex = flexes.get(i);
+			dates.add(MeasureDateConverter.of(pressure, flex));
+		}
+
+		return dates;
 	}
 }
