@@ -28,12 +28,14 @@ public class Finger {
 		return new Finger(0, 0, 0, 0, 0);
 	}
 
-	public void makeAverage(int size) {
+	public Finger makeAverage(int size) {
 		this.thumb /= size;
 		this.indexFinger /= size;
 		this.middleFinger /= size;
 		this.ringFinger /= size;
 		this.littleFinger /= size;
+
+		return this;
 	}
 
 	public void addValue(Finger finger) {

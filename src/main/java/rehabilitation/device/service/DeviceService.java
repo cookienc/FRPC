@@ -3,6 +3,7 @@ package rehabilitation.device.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rehabilitation.device.controller.PressureResponseConverter;
 import rehabilitation.device.model.Finger;
 import rehabilitation.device.model.Flex;
 import rehabilitation.device.model.Pressure;
@@ -11,7 +12,6 @@ import rehabilitation.device.model.dto.SensorBarGraphResponse;
 import rehabilitation.device.repository.FlexRepository;
 import rehabilitation.device.repository.PressureRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -46,33 +46,50 @@ public class DeviceService {
 		return SensorBarGraphResponse.of(toPressureRes(pressure), toFlexRes(flex));
 	}
 
-	public List<PressureResponse> getLineGraph(LocalDateTime dateTime) {
+	public List<PressureResponse> getLineGraph(LocalDateTime date) {
 		List<PressureResponse> responses = new ArrayList<>();
 
 		for (int i = 0; i < 5; i++) {
-			LocalDate date = dateTime.toLocalDate().minusDays(i);
-			LocalDateTime start = LocalDateTime.of(date, LocalTime.of(0, 0, 0));
-			LocalDateTime end = LocalDateTime.of(date, LocalTime.of(23, 59, 59));
-			List<Pressure> pressures = pressureRepository.findByCreatedAtBetween(start, end);
-
-			if (pressures.isEmpty()) {
-				return responses;
-			}
-
-			Finger finger = Finger.empty();
-			for (Pressure pressure : pressures) {
-				finger.addValue(pressure.getFinger());
-			}
-
-			finger.makeAverage(pressures.size());
-
-			Pressure latestPressure = pressures.get(pressures.size() - 1);
-			LocalDateTime pressureDate = LocalDateTime.of(latestPressure.getCreatedAt().toLocalDate(), LocalTime.of(0, 0, 0));
-			responses.add(PressureResponse.of(latestPressure.getId(), finger, pressureDate));
+			List<Pressure> pressures = getPressures(date, i);
+			addData(responses, pressures);
 		}
 
 		return responses.stream()
 				.sorted(comparing(PressureResponse::getDate))
 				.collect(toList());
+	}
+
+	private void addData(List<PressureResponse> responses, List<Pressure> pressures) {
+		if (pressures.isEmpty()) {
+			return;
+		}
+
+		Finger finger = getAverage(pressures);
+		Pressure latestPressure = pressures.get(pressures.size() - 1);
+		LocalDateTime pressureDate = LocalDateTime.of(latestPressure.getCreatedAt().toLocalDate(), LocalTime.of(0, 0, 0));
+
+		responses.add(PressureResponseConverter.of(latestPressure.getId(), finger, pressureDate));
+	}
+
+	private List<Pressure> getPressures(LocalDateTime date, int i) {
+		return pressureRepository.findByCreatedAtBetween(getStartDate(date, i), getEndDate(date, i));
+	}
+
+	private Finger getAverage(List<Pressure> pressures) {
+		Finger finger = Finger.empty();
+
+		for (Pressure pressure : pressures) {
+			finger.addValue(pressure.getFinger());
+		}
+
+		return finger.makeAverage(pressures.size());
+	}
+
+	private LocalDateTime getStartDate(LocalDateTime date, int before) {
+		return LocalDateTime.of(date.toLocalDate().minusDays(before), LocalTime.of(0, 0, 0));
+	}
+
+	private LocalDateTime getEndDate(LocalDateTime date, int before) {
+		return LocalDateTime.of(date.toLocalDate().minusDays(before), LocalTime.of(23, 59, 59));
 	}
 }
