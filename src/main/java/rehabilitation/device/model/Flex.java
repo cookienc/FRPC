@@ -34,18 +34,18 @@ public class Flex extends BaseEntity {
 	}
 
 	public Integer getIndexFinger() {
-		return finger.getIndexFinger();
+		return finger.getIndex();
 	}
 
 	public Integer getMiddleFinger() {
-		return finger.getMiddleFinger();
+		return finger.getMiddle();
 	}
 
 	public Integer getRingFinger() {
-		return finger.getRingFinger();
+		return finger.getRing();
 	}
 
 	public Integer getLittleFinger() {
-		return finger.getLittleFinger();
+		return finger.getLittle();
 	}
 }

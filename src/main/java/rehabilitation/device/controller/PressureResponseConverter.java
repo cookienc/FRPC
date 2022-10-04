@@ -32,10 +32,10 @@ public class PressureResponseConverter {
 		return PressureResponse.builder()
 				.id(id)
 				.thumb(finger.getThumb())
-				.indexFinger(finger.getIndexFinger())
-				.middleFinger(finger.getMiddleFinger())
-				.ringFinger(finger.getRingFinger())
-				.littleFinger(finger.getLittleFinger())
+				.indexFinger(finger.getIndex())
+				.middleFinger(finger.getMiddle())
+				.ringFinger(finger.getRing())
+				.littleFinger(finger.getLittle())
 				.date(date)
 				.build();
 	}
