@@ -1,4 +1,4 @@
-package rehabilitation.device.controller;
+package rehabilitation.device.controller.converter;
 
 import lombok.Getter;
 import rehabilitation.device.model.Flex;

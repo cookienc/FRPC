@@ -1,1 +1,21 @@
+spring:
+  web:
+    resources:
+      static-locations:
+        classpath: /META-INF/resources/, /resources/, /static/, /public/, /static/dist
 
+  datasource:
+    url: jdbc:mysql://garak.c2smiwxk0sg3.ap-northeast-2.rds.amazonaws.com:3306/garak?serverTimezone=Asia/Seoul
+    username: admin
+    password: 12qw12qw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true

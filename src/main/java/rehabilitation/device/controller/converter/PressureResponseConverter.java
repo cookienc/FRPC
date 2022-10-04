@@ -1,4 +1,4 @@
-package rehabilitation.device.controller;
+package rehabilitation.device.controller.converter;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -32,10 +32,10 @@ public class PressureResponseConverter {
 		return PressureResponse.builder()
 				.id(id)
 				.thumb(finger.getThumb())
-				.indexFinger(finger.getIndex())
-				.middleFinger(finger.getMiddle())
-				.ringFinger(finger.getRing())
-				.littleFinger(finger.getLittle())
+				.indexFinger(finger.getIndexFinger())
+				.middleFinger(finger.getMiddleFinger())
+				.ringFinger(finger.getRingFinger())
+				.littleFinger(finger.getLittleFinger())
 				.date(date)
 				.build();
 	}

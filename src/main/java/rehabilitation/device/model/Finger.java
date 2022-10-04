@@ -10,18 +10,18 @@ import javax.persistence.Embeddable;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Finger {
-	private Integer thumb;
-	private Integer index;
-	private Integer middle;
-	private Integer ring;
-	private Integer little;
+	private int thumb;
+	private int indexFinger;
+	private int middleFinger;
+	private int ringFinger;
+	private int littleFinger;
 
-	public Finger(Integer thumb, Integer index, Integer middle, Integer ring, Integer little) {
+	public Finger(int thumb, int indexFinger, int middleFinger, int ringFinger, int littleFinger) {
 		this.thumb = thumb;
-		this.index = index;
-		this.middle = middle;
-		this.ring = ring;
-		this.little = little;
+		this.indexFinger = indexFinger;
+		this.middleFinger = middleFinger;
+		this.ringFinger = ringFinger;
+		this.littleFinger = littleFinger;
 	}
 
 	public static Finger empty() {
@@ -30,19 +30,19 @@ public class Finger {
 
 	public Finger makeAverage(int size) {
 		this.thumb /= size;
-		this.index /= size;
-		this.middle /= size;
-		this.ring /= size;
-		this.little /= size;
+		this.indexFinger /= size;
+		this.middleFinger /= size;
+		this.ringFinger /= size;
+		this.littleFinger /= size;
 
 		return this;
 	}
 
 	public void addValue(Finger finger) {
 		this.thumb += finger.getThumb();
-		this.index += finger.getIndex();
-		this.middle += finger.getMiddle();
-		this.ring += finger.getRing();
-		this.little += finger.getLittle();
+		this.indexFinger += finger.getIndexFinger();
+		this.middleFinger += finger.getMiddleFinger();
+		this.ringFinger += finger.getRingFinger();
+		this.littleFinger += finger.getLittleFinger();
 	}
 }

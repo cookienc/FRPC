@@ -3,8 +3,8 @@ package rehabilitation.device.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rehabilitation.device.controller.MeasureDateConverter;
-import rehabilitation.device.controller.PressureResponseConverter;
+import rehabilitation.device.controller.converter.MeasureDateConverter;
+import rehabilitation.device.controller.converter.PressureResponseConverter;
 import rehabilitation.device.model.Finger;
 import rehabilitation.device.model.Flex;
 import rehabilitation.device.model.Pressure;
@@ -22,8 +22,8 @@ import java.util.NoSuchElementException;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
-import static rehabilitation.device.controller.SensorBarGraphConverter.toFlexRes;
-import static rehabilitation.device.controller.SensorBarGraphConverter.toPressureRes;
+import static rehabilitation.device.controller.converter.SensorBarGraphConverter.toFlexRes;
+import static rehabilitation.device.controller.converter.SensorBarGraphConverter.toPressureRes;
 
 @Service
 @Transactional(readOnly = true)
@@ -62,8 +62,8 @@ public class DeviceService {
 	}
 
 	public List<MeasureDate> getMeasureDate(LocalDateTime date) {
-		List<Pressure> pressures = pressureRepository.findByCreatedAtBetween(getStartDate(date, 0), getEndDate(date, 0));
 		List<Flex> flexes = flexRepository.findByCreatedAtBetween(getStartDate(date, 0), getEndDate(date, 0));
+		List<Pressure> pressures = pressureRepository.findByCreatedAtBetween(getStartDate(date, 0), getEndDate(date, 0));
 		return getMeasureDates(pressures, flexes);
 	}
 

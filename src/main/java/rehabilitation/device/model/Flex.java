@@ -29,23 +29,23 @@ public class Flex extends BaseEntity {
 		this.finger = finger;
 	}
 
-	public Integer getThumb() {
+	public int getThumb() {
 		return finger.getThumb();
 	}
 
-	public Integer getIndexFinger() {
-		return finger.getIndex();
+	public int getIndexFinger() {
+		return finger.getIndexFinger();
 	}
 
-	public Integer getMiddleFinger() {
-		return finger.getMiddle();
+	public int getMiddleFinger() {
+		return finger.getMiddleFinger();
 	}
 
-	public Integer getRingFinger() {
-		return finger.getRing();
+	public int getRingFinger() {
+		return finger.getRingFinger();
 	}
 
-	public Integer getLittleFinger() {
-		return finger.getLittle();
+	public int getLittleFinger() {
+		return finger.getLittleFinger();
 	}
 }
