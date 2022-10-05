@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>측정 날짜</th>
+        </tr>
+       <tr th:each="m : ${measures}">
+           <td th:text="${mStat.count}"></td>
+           <td th:text="${#temporals.format(m.time,'yyyy/MM/dd HH시mm분ss초')}"></td>
+       </tr>
+    </table>
+</body>
+</html>
