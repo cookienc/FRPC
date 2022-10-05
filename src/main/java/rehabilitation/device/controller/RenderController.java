@@ -34,4 +34,10 @@ public class RenderController {
 		model.addAttribute("measures", deviceService.getMeasureDate(localDateTime));
 		return "list";
 	}
+
+	@GetMapping("/line-graph")
+	public String getLineGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date, Model model) {
+		model.addAttribute("pressures", deviceService.getLineGraph(date));
+		return "line-graph";
+	}
 }
