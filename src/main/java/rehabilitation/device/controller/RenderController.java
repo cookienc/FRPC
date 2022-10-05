@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import rehabilitation.device.model.dto.SensorBarGraphResponse;
 import rehabilitation.device.service.DeviceService;
 
 import java.time.LocalDateTime;
@@ -39,5 +40,14 @@ public class RenderController {
 	public String getLineGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date, Model model) {
 		model.addAttribute("pressures", deviceService.getLineGraph(date));
 		return "line-graph";
+	}
+
+	@GetMapping("/bar-graph")
+	public String getBarGraph(@RequestParam Long pressureId, @RequestParam Long flexId, Model model) {
+		SensorBarGraphResponse barGraph = deviceService.getBarGraph(pressureId, flexId);
+		model.addAttribute("pressures", barGraph.getPressures());
+		model.addAttribute("criteria", barGraph.getCriteria());
+		model.addAttribute("flexes", barGraph.getFlexes());
+		return "bar-graph";
 	}
 }
