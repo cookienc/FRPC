@@ -6,8 +6,8 @@
 </head>
 <body>
 <ul>
-    <li><a ref="/bar-graph">막대 그래프 출력</a></li>
-    <li><a ref="/line-graph">꺽은선 그래프 출력</a></li>
+    <li><a th:href="@{/bar-graph?pressureId=1&flexId=1}">막대 그래프 출력</a></li>
+    <li><a th:href="@{/line-graph(date=${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd HH:mm:ss')})}">꺽은선 그래프 출력</a></li>
     <li><a th:href="@{/list(date=${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd HH:mm:ss')})}">리스트 출력</a></li>
 </ul>
 </body>
