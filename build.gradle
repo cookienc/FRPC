@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id "com.github.node-gradle.node" version "3.1.0" // <--- 추가
 	id 'java'
 }
 
@@ -29,6 +30,32 @@ dependencies {
 	testImplementation 'io.rest-assured:rest-assured:4.4.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+node {
+	version = '14.16.1'
+	npmVersion = '7.18.1'
+	download = true
+	workDir = file("${project.buildDir}/nodejs")
+	npmWorkDir = file("${project.buildDir}/npm")
+}
+
+//이미 빌드된 파일 삭제
+task deleteVueArtifact(type: Delete) {
+	delete "src/main/resources/static"
+}
+
+//npm install
+task frontNpmInstall(type: NpmTask) {
+	workingDir = file("${project.projectDir}/src/frontend")
+	args = ['install']
+}
+
+//npm run build
+task npmBuild(type: NpmTask, dependsOn: ['deleteVueArtifact', 'frontNpmInstall']) {
+	workingDir = file("${project.projectDir}/src/frontend")
+	args = ['run', 'build']
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
