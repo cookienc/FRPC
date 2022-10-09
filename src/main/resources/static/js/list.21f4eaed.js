@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue_front"]=self["webpackChunkvue_front"]||[]).push([[93],{7975:function(n,r,u){u.r(r),u.d(r,{default:function(){return a}});var e=u(3396);function t(n,r){return(0,e.wg)(),(0,e.iD)("h1",null,"List")}var f=u(89);const c={},s=(0,f.Z)(c,[["render",t]]);var a=s}}]);
-//# sourceMappingURL=list.21f4eaed.js.map

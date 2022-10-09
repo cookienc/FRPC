@@ -82,7 +82,6 @@ export default {
       var seconds = ("0" + today.getSeconds()).slice(-2);
       var timeString = dateString + " " + hours + ":" + minutes + ":" + seconds;
       today = timeString;
-      console.log(timeString);
       return timeString;
     },
   },
