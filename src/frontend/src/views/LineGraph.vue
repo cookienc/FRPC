@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <h1>최근 5일 동안 압력 측정 현황</h1>
+    <div v-if="getPressures().length > 1">
     <GChart
       id="chart"
       type="LineChart"
       :data="getPressures()"
       :options="chartOptions"
     />
+    </div>
+    <div id="err" v-else>
+      최근 5일간의 기록이 없습니다
+    </div>
   </div>
 </template>
 
@@ -85,6 +90,11 @@ export default {
 <style>
 h1 {
   margin-top: 50px;
+}
+
+#err {
+  margin-top: 30px;
+  font-size: x-large;
 }
 
 #chart {
