@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/home")
 @RequiredArgsConstructor
 @Slf4j
