@@ -2,7 +2,7 @@
   <div id="app">
     <h1>최근 5일 동안 압력 측정 현황</h1>
     <div v-if="getPressures().length > 1">
-    <GChart
+      <GChart
       id="chart"
       type="LineChart"
       :data="getPressures()"
@@ -12,17 +12,20 @@
     <div id="err" v-else>
       최근 5일간의 기록이 없습니다
     </div>
+    <date-picker/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { GChart } from "vue-google-charts";
+import datePicker from "./DatePicker"
 
 export default {
   name: "App",
   components: {
     GChart,
+    datePicker: datePicker
   },
 
   data() {
