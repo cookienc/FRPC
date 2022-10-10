@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +38,9 @@ public class DeviceController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<List<MeasureDate>> getMeasureDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS") LocalDateTime date) {
-		return ResponseEntity.ok().body(deviceService.getMeasureDate(date));
+	public ResponseEntity<List<MeasureDate>> getMeasureDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
+		log.info("date = {}", date);
+		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return ResponseEntity.ok().body(deviceService.getMeasureDate(localDateTime));
 	}
 }
