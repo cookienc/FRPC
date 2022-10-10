@@ -3,15 +3,19 @@
   <div class="flex" v-if="records.length >= 1">
     <v-table id="table">
       <thead>
-      <th>번호</th>
-      <th>날짜</th>
+        <th>번호</th>
+        <th>날짜</th>
+        <th>상세 보기</th>
       </thead>
       <tbody
           :key="i" v-for="(record, i) in records">
       <td>{{ i + 1 }}</td>
       <td>{{ makeDate(record.time) }}</td>
       <td>
-        <v-btn @click="goto(record.pressureId, record.flexId)"></v-btn>
+        <v-btn color="#A1887F"
+               elevation="2"
+               @click="goto(record.pressureId, record.flexId)">이동
+        </v-btn>
       </td>
       </tbody>
     </v-table>
@@ -93,7 +97,8 @@ h1 {
   width: 100%;
   max-width: 1000px;
 }
-tr {
+
+th {
   background: whitesmoke;
 }
 
