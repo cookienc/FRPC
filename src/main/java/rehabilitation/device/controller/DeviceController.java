@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
 public class DeviceController {

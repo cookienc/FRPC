@@ -57,7 +57,7 @@ export default {
 
     async getData() {
       await axios
-          .get("http://localhost:8080/home/list", {
+          .get("http://localhost:8080/api/list", {
             params: {
               date: this.getDate(),
             },

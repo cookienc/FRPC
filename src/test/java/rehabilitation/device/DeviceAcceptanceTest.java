@@ -60,7 +60,7 @@ class DeviceAcceptanceTest {
 		//when
 		ExtractableResponse<Response> 응답 = given()
 				.when()
-				.get("/home/bar-graph?pressureId={pressureId}&flexId={flexId}", 1L, 1L)
+				.get("/api/bar-graph?pressureId={pressureId}&flexId={flexId}", 1L, 1L)
 				.then().log().all()
 				.extract();
 
@@ -99,7 +99,7 @@ class DeviceAcceptanceTest {
 	    //when
 		ExtractableResponse<Response> 응답 = given()
 				.when()
-				.get("/home/list?date={date}", LocalDateTime.now().toString())
+				.get("/api/list?date={date}", LocalDateTime.now().toString().substring(0, 10) + " 00:00:00")
 				.then().log().all()
 				.extract();
 

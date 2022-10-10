@@ -57,7 +57,7 @@ export default {
 
     async getData() {
       await axios
-        .get("http://localhost:8080/home/line-graph", {
+        .get("http://localhost:8080/api/line-graph", {
           params: {
             date: this.getDate(),
           },

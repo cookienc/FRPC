@@ -82,7 +82,7 @@ export default {
     },
     async getData() {
       await axios
-        .get("http://localhost:8080/home/bar-graph", {
+        .get("http://localhost:8080/api/bar-graph", {
           params: {
             pressureId: this.$route.query.pressureId,
             flexId: this.$route.query.flexId,
