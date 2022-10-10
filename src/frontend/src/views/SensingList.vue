@@ -1,5 +1,5 @@
 <template>
-  <h1>List</h1>
+  <h1>[{{ makeTitle(this.$route.query.date) }}]</h1>
   <div class="flex" v-if="records.length >= 1">
     <v-table id="table">
       <thead>
@@ -10,7 +10,7 @@
       <tbody
           :key="i" v-for="(record, i) in records">
       <td>{{ i + 1 }}</td>
-      <td>{{ makeDate(record.time) }}</td>
+      <td>{{ makeDateAndTime(record.time) }}</td>
       <td>
         <v-btn color="#A1887F"
                elevation="2"
@@ -47,7 +47,15 @@ export default {
   },
 
   methods: {
-    makeDate(date) {
+    makeTitle(date) {
+      var ret = date.substring(0, 4) + "년 " +
+          date.substring(5, 7) + "월 " +
+          date.substring(8, 10) + "일" +
+          "의 기록"
+      return ret;
+    },
+
+    makeDateAndTime(date) {
       var ret = date.substring(0, 10) + " "
           + date.substring(11, 13) + "시 "
           + date.substring(14, 16) + "분 "
