@@ -1,7 +1,7 @@
 <template>
   <h1>List</h1>
-  <div v-if="records.length >= 1">
-    <v-table>
+  <div class="flex" v-if="records.length >= 1">
+    <v-table id="table">
       <thead>
       <th>번호</th>
       <th>날짜</th>
@@ -16,7 +16,7 @@
       </tbody>
     </v-table>
   </div>
-  <div id="err" v-else>
+  <div class="flex" id="err" v-else>
     기록이 없습니다
   </div>
   <datePicker/>
@@ -79,3 +79,41 @@ export default {
   },
 }
 </script>
+
+<style>
+h1 {
+  margin-top: 50px;
+}
+
+#table {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1000px;
+}
+tr {
+  background: whitesmoke;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.flex {
+  display: grid;
+  place-content: center;
+  margin-bottom: 50px;
+}
+
+#err {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: x-large;
+}
+</style>

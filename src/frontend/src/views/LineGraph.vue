@@ -101,5 +101,6 @@ h1 {
 
 #chart {
   height: 700px;
+  margin-bottom: 30px;
 }
 </style>
