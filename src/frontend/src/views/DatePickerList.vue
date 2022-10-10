@@ -27,7 +27,6 @@ export default {
     goto() {
       var date = document.querySelector("#input_date").value;
       date = date.concat(" 00:00:00");
-      console.log(date);
       this.$router.push({ name: 'list', query: {date: date} });
     }
   }

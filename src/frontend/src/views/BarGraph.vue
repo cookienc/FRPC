@@ -89,7 +89,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           this.criteria = res.data.criteria;
           this.flexes = res.data.flexes;
           this.pressures = res.data.pressures;

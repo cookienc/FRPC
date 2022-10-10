@@ -63,7 +63,6 @@ export default {
             },
           })
           .then((res) => {
-            console.log(res.data);
             this.records = res.data;
           })
           .catch((err) => console.log(err));

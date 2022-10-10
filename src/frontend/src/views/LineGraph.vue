@@ -63,7 +63,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           for (var i = 0; i < res.data.length; i++) {
             this.pressures.push(res.data[i]);
           }

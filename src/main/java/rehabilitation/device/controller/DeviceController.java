@@ -20,7 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Slf4j
 public class DeviceController {
 
 	private final DeviceService deviceService;
@@ -32,14 +31,12 @@ public class DeviceController {
 
 	@GetMapping("/line-graph")
 	public ResponseEntity<List<PressureResponse>> getLineGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
-		log.info("date = {}", date);
 		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		return ResponseEntity.ok().body(deviceService.getLineGraph(localDateTime));
 	}
 
 	@GetMapping("/list")
 	public ResponseEntity<List<MeasureDate>> getMeasureDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
-		log.info("date = {}", date);
 		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		return ResponseEntity.ok().body(deviceService.getMeasureDate(localDateTime));
 	}
