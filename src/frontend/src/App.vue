@@ -10,14 +10,6 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item router :to="{ name: 'barGraph' }" exact>
-          <v-list-item-action>
-            <i class="fas fa-barGraph"></i>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>BarGraph</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
         <v-list-item
             router
             :to="{ name: 'lineGraph', query: { date: this.getDate() } }"
