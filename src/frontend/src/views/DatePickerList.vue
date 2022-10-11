@@ -1,9 +1,9 @@
 <template>
   <v-form>
     <v-container>
-          <input type="date" id="input_date" :max="getToday()">
-          <v-btn style="margin-left: 30px" @click="goto()">조회
-          </v-btn>
+      <input type="date" id="input_date" :max="getToday()" :value="getToday()">
+      <v-btn style="margin-left: 30px" @click="goto()">조회
+      </v-btn>
     </v-container>
   </v-form>
 </template>
@@ -27,7 +27,7 @@ export default {
     goto() {
       var date = document.querySelector("#input_date").value;
       date = date.concat(" 00:00:00");
-      this.$router.push({ name: 'list', query: {date: date} });
+      this.$router.push({name: 'list', query: {date: date}});
     }
   }
 }

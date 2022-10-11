@@ -1,7 +1,7 @@
 <template>
   <v-form>
     <v-container>
-          <input type="date" id="input_date" :max="getToday()">
+          <input type="date" id="input_date" :max="getToday()" :value="getToday()">
           <v-btn style="margin-left: 30px" @click="goto()">조회
           </v-btn>
     </v-container>
