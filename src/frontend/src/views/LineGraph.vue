@@ -57,7 +57,7 @@ export default {
 
     async getData() {
       var url = window.location.protocol + "//" +
-          window.location.hostname + ":8080/api/line-graph";
+          window.location.hostname + "/api/line-graph";
       console.log(url)
       await axios
         .get(url, {

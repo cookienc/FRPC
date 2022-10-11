@@ -82,7 +82,7 @@ export default {
     },
     async getData() {
       var url = window.location.protocol + "//" +
-          window.location.hostname + ":8080/api/bar-graph";
+          window.location.hostname + "/api/bar-graph";
       console.log(url);
       await axios
         .get(url, {
