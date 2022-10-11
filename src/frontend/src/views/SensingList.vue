@@ -68,8 +68,7 @@ export default {
     },
 
     async getData() {
-      var url = window.location.protocol + "//" +
-          window.location.hostname + "/api/list";
+      var url = process.env.VUE_APP_API_URI + "/api/list";
       console.log(url)
       await axios
           .get(url, {

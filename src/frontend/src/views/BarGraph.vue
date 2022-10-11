@@ -81,8 +81,7 @@ export default {
       ];
     },
     async getData() {
-      var url = window.location.protocol + "//" +
-          window.location.hostname + "/api/bar-graph";
+      var url = process.env.VUE_APP_API_URI + "/api/bar-graph";
       console.log(url);
       await axios
         .get(url, {
