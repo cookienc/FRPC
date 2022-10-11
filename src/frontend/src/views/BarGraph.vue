@@ -81,8 +81,11 @@ export default {
       ];
     },
     async getData() {
+      var url = window.location.protocol + "//" +
+          window.location.hostname + ":8080/api/bar-graph";
+      console.log(url);
       await axios
-        .get("http://localhost:8080/api/bar-graph", {
+        .get(url, {
           params: {
             pressureId: this.$route.query.pressureId,
             flexId: this.$route.query.flexId,

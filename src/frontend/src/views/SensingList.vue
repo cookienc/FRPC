@@ -68,8 +68,11 @@ export default {
     },
 
     async getData() {
+      var url = window.location.protocol + "//" +
+          window.location.hostname + ":8080/api/list";
+      console.log(url)
       await axios
-          .get("http://localhost:8080/api/list", {
+          .get(url, {
             params: {
               date: this.getDate(),
             },
