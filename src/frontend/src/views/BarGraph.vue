@@ -15,19 +15,19 @@
         </caption>
         <thead>
           <tr>
-            <th class="text-left">엄지</th>
+<!--            <th class="text-left">엄지</th>-->
             <th class="text-left">검지</th>
             <th class="text-left">중지</th>
             <th class="text-left">약지</th>
-            <th class="text-left">새끼</th>
+<!--            <th class="text-left">새끼</th>-->
           </tr>
         </thead>
         <tbody>
-          <td>{{ flexes.thumb }}</td>
+<!--          <td>{{ flexes.thumb }}</td>-->
           <td>{{ flexes.indexFinger }}</td>
           <td>{{ flexes.middleFinger }}</td>
           <td>{{ flexes.ringFinger }}</td>
-          <td>{{ flexes.littleFinger }}</td>
+<!--          <td>{{ flexes.littleFinger }}</td>-->
         </tbody>
       </table>
     </div>
