@@ -54,11 +54,10 @@ export default {
         hAxis: {
           title: "손가락",
           titleTextStyle: { color: "#333" },
+          ticks: [0, 100, 200, 300, 400, 500, 600, 700, 800],
         },
         vAxis: {
           title: "압력",
-          minValue: 0,
-          ticks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45],
         },
       },
     };
