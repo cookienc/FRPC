@@ -3,7 +3,7 @@
     <h1>손가락 압력 그래프</h1>
     <GChart
       id="chart"
-      type="AreaChart"
+      type="BarChart"
       :settings="{ packages: ['corechart'] }"
       :data="getChartInfo()"
       :options="chartOptions"
@@ -49,7 +49,6 @@ export default {
     return {
       flexes: [],
       pressures: [],
-      criteria: [],
 
       chartOptions: {
         hAxis: {
@@ -72,12 +71,12 @@ export default {
   methods: {
     getChartInfo() {
       return [
-        ["손가락", "기준", "사용자"],
-        ["엄지", this.criteria.thumb, this.pressures.thumb],
-        ["검지", this.criteria.indexFinger, this.pressures.indexFinger],
-        ["중지", this.criteria.middleFinger, this.pressures.middleFinger],
-        ["약지", this.criteria.ringFinger, this.pressures.ringFinger],
-        ["새끼", this.criteria.littleFinger, this.pressures.thumb],
+        ["손가락", "사용자"],
+        ["엄지", this.pressures.thumb],
+        ["검지", this.pressures.indexFinger],
+        ["중지", this.pressures.middleFinger],
+        ["약지", this.pressures.ringFinger],
+        ["새끼", this.pressures.thumb],
       ];
     },
     async getData() {
@@ -91,7 +90,7 @@ export default {
           },
         })
         .then((res) => {
-          this.criteria = res.data.criteria;
+          console.log(res.data)
           this.flexes = res.data.flexes;
           this.pressures = res.data.pressures;
         })
