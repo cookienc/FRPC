@@ -2,11 +2,11 @@
   <div id="app">
     <h1>손가락 압력 그래프</h1>
     <GChart
-      id="chart"
-      type="BarChart"
-      :settings="{ packages: ['corechart'] }"
-      :data="getChartInfo()"
-      :options="chartOptions"
+        id="chart"
+        type="BarChart"
+        :settings="{ packages: ['corechart'] }"
+        :data="getChartInfo()"
+        :options="chartOptions"
     />
     <div class="flex">
       <table id="table">
@@ -14,20 +14,20 @@
           [곡률 반경 (cm)]
         </caption>
         <thead>
-          <tr>
-<!--            <th class="text-left">엄지</th>-->
-            <th class="text-left">검지</th>
-            <th class="text-left">중지</th>
-            <th class="text-left">약지</th>
-<!--            <th class="text-left">새끼</th>-->
-          </tr>
+        <tr>
+          <!--            <th class="text-left">엄지</th>-->
+          <th class="text-left">검지</th>
+          <th class="text-left">중지</th>
+          <th class="text-left">약지</th>
+          <!--            <th class="text-left">새끼</th>-->
+        </tr>
         </thead>
         <tbody>
-<!--          <td>{{ flexes.thumb }}</td>-->
-          <td>{{ flexes.indexFinger }} cm</td>
-          <td>{{ flexes.middleFinger }} cm</td>
-          <td>{{ flexes.ringFinger }} cm</td>
-<!--          <td>{{ flexes.littleFinger }}</td>-->
+        <!--          <td>{{ flexes.thumb }}</td>-->
+        <td>{{ flexes.indexFinger }} cm</td>
+        <td>{{ flexes.middleFinger }} cm</td>
+        <td>{{ flexes.ringFinger }} cm</td>
+        <!--          <td>{{ flexes.littleFinger }}</td>-->
         </tbody>
       </table>
     </div>
@@ -36,7 +36,7 @@
 
 <script>
 import axios from "axios";
-import { GChart } from "vue-google-charts";
+import {GChart} from "vue-google-charts";
 
 export default {
   name: "App",
@@ -51,15 +51,17 @@ export default {
       pressures: [],
 
       chartOptions: {
+        legend: 'none',
         hAxis: {
-          title: "손가락",
-          titleTextStyle: { color: "#333" },
+          title: "압력(N)",
+          gridlines: {count : 5},
+          titleTextStyle: {color: "#333"},
         },
         vAxis: {
           legend: {
             position: 'none'
           },
-          title: "압력(N)",
+          title: "손가락",
         },
       },
     };
@@ -84,18 +86,18 @@ export default {
       var url = process.env.VUE_APP_API_URI + "/api/bar-graph";
       console.log(url);
       await axios
-        .get(url, {
-          params: {
-            pressureId: this.$route.query.pressureId,
-            flexId: this.$route.query.flexId,
-          },
-        })
-        .then((res) => {
-          console.log(res.data)
-          this.flexes = res.data.flexes;
-          this.pressures = res.data.pressures;
-        })
-        .catch((err) => console.log(err));
+          .get(url, {
+            params: {
+              pressureId: this.$route.query.pressureId,
+              flexId: this.$route.query.flexId,
+            },
+          })
+          .then((res) => {
+            console.log(res.data)
+            this.flexes = res.data.flexes;
+            this.pressures = res.data.pressures;
+          })
+          .catch((err) => console.log(err));
     },
   },
 };
@@ -112,6 +114,7 @@ export default {
   width: 100%;
   max-width: 800px;
 }
+
 tr {
   background: whitesmoke;
 }
