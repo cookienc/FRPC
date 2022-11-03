@@ -7,6 +7,8 @@ import rehabilitation.device.model.dto.PressureResponse;
 
 import java.time.LocalDateTime;
 
+import static rehabilitation.device.utils.SensorUtils.mapPressure;
+
 @Getter
 public class PressureResponseConverter {
 	private Long id;
@@ -31,11 +33,11 @@ public class PressureResponseConverter {
 	public static PressureResponse of(Long id, Finger finger, LocalDateTime date) {
 		return PressureResponse.builder()
 				.id(id)
-				.thumb(finger.getThumb())
-				.indexFinger(finger.getIndexFinger())
-				.middleFinger(finger.getMiddleFinger())
-				.ringFinger(finger.getRingFinger())
-				.littleFinger(finger.getLittleFinger())
+				.thumb(mapPressure(finger.getThumb()))
+				.indexFinger(mapPressure(finger.getIndexFinger()))
+				.middleFinger(mapPressure(finger.getMiddleFinger()))
+				.ringFinger(mapPressure(finger.getRingFinger()))
+				.littleFinger(mapPressure(finger.getLittleFinger()))
 				.date(date)
 				.build();
 	}

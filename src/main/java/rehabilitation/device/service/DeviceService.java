@@ -1,6 +1,7 @@
 package rehabilitation.device.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rehabilitation.device.controller.converter.MeasureDateConverter;
@@ -28,6 +29,7 @@ import static rehabilitation.device.controller.converter.SensorBarGraphConverter
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class DeviceService {
 
 	private final FlexRepository flexRepository;
