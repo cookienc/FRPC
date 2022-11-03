@@ -40,7 +40,6 @@ export default {
         vAxis: {
           title: "압력",
           minValue: 10,
-          ticks: [10, 15, 20, 25, 30],
         },
       },
     };

@@ -11,7 +11,7 @@
     <div class="flex">
       <table id="table">
         <caption>
-          [구부림 정도]
+          [곡률 반경 (cm)]
         </caption>
         <thead>
           <tr>
@@ -24,9 +24,9 @@
         </thead>
         <tbody>
 <!--          <td>{{ flexes.thumb }}</td>-->
-          <td>{{ flexes.indexFinger }}</td>
-          <td>{{ flexes.middleFinger }}</td>
-          <td>{{ flexes.ringFinger }}</td>
+          <td>{{ flexes.indexFinger }} cm</td>
+          <td>{{ flexes.middleFinger }} cm</td>
+          <td>{{ flexes.ringFinger }} cm</td>
 <!--          <td>{{ flexes.littleFinger }}</td>-->
         </tbody>
       </table>
@@ -54,10 +54,12 @@ export default {
         hAxis: {
           title: "손가락",
           titleTextStyle: { color: "#333" },
-          ticks: [0, 100, 200, 300, 400, 500, 600, 700, 800],
         },
         vAxis: {
-          title: "압력",
+          legend: {
+            position: 'none'
+          },
+          title: "압력(N)",
         },
       },
     };
