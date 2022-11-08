@@ -22,6 +22,18 @@
             <v-list-item-title>LineGraph</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item
+            router
+            :to="{ name: 'lineFlexGraph', query: { date: this.getDate() } }"
+            exact
+        >
+          <v-list-item-action>
+            <i class="fas fa-lineGraph"></i>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>LineFlexGraph</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item router :to="{ name: 'list', query: { date: this.getDate() } }" exact>
           <v-list-item-action>
             <i class="fas fa-list"></i>

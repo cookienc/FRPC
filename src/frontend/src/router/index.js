@@ -9,6 +9,10 @@ const LineGraph = () => {
   return import(/* webpackChunkName: "lineGraph" */ "../views/LineGraph.vue");
 };
 
+const LineFlexGraph = () => {
+  return import(/* webpackChunkName: "lineGraph" */ "../views/LineFlexGraph.vue");
+};
+
 const List = () => {
   return import(/* webpackChunkName: "list" */ "../views/SensingList.vue");
 };
@@ -28,6 +32,11 @@ const routes = [
     path: "/line-graph",
     name: "lineGraph",
     component: LineGraph,
+  },
+  {
+    path: "/line-graph/flex",
+    name: "lineFlexGraph",
+    component: LineFlexGraph,
   },
   {
     path: "/list",

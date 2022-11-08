@@ -114,4 +114,43 @@ public class DeviceService {
 
 		return dates;
 	}
+
+	public List<PressureResponse> getLineFlexGraph(LocalDateTime date) {
+		List<PressureResponse> responses = new ArrayList<>();
+
+		for (int i = 0; i < 5; i++) {
+			List<Flex> pressures = getFlexPressures(date, i);
+			addDataFlex(responses, pressures);
+		}
+
+		return responses.stream()
+				.sorted(comparing(PressureResponse::getDate))
+				.collect(toList());
+	}
+
+	private List<Flex> getFlexPressures(LocalDateTime date, int i) {
+		return flexRepository.findByCreatedAtBetween(getStartDate(date, i), getEndDate(date, i));
+	}
+
+	private void addDataFlex(List<PressureResponse> responses, List<Flex> flexes) {
+		if (flexes.isEmpty()) {
+			return;
+		}
+
+		Finger finger = getAverageFlex(flexes);
+		Flex latestFlex = flexes.get(flexes.size() - 1);
+		LocalDateTime flexDate = LocalDateTime.of(latestFlex.getCreatedAt().toLocalDate(), LocalTime.of(0, 0, 0));
+
+		responses.add(PressureResponseConverter.of(latestFlex.getId(), finger, flexDate));
+	}
+
+	private Finger getAverageFlex(List<Flex> flexes) {
+		Finger finger = Finger.empty();
+
+		for (Flex flex : flexes) {
+			finger.addValue(flex.getFinger());
+		}
+
+		return finger.makeAverage(flexes.size());
+	}
 }

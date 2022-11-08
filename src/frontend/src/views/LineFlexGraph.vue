@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <h1>최근 5일 동안 압력 측정 현황</h1>
-    <div v-if="getPressures().length > 1">
+    <h1>최근 5일 동안 곡률반 측정 현황</h1>
+    <div v-if="getFlexes().length > 1">
       <GChart
       id="chart"
       type="LineChart"
-      :data="getPressures()"
+      :data="getFlexes()"
       :options="chartOptions"
     />
     </div>
@@ -19,7 +19,7 @@
 <script>
 import axios from "axios";
 import { GChart } from "vue-google-charts";
-import datePicker from "./DatePicker"
+import datePicker from "./DatePickerFlexLine"
 
 export default {
   name: "App",
@@ -38,11 +38,7 @@ export default {
           titleTextStyle: { color: "#333" },
         },
         vAxis: {
-          title: "압력(N)",
-          minValue: 15,
-          viewWindow: {
-            min: 15,
-          }
+          title: "곡률반경(cm)",
         },
       },
     };
@@ -58,7 +54,7 @@ export default {
     },
 
     async getData() {
-      var url = process.env.VUE_APP_API_URI + "/api/line-graph";
+      var url = process.env.VUE_APP_API_URI + "/api/line-graph/flex";
       console.log(url)
       await axios
         .get(url, {
@@ -74,17 +70,15 @@ export default {
         .catch((err) => console.log(err));
     },
 
-    getPressures() {
-      var list = [["날짜", "엄지", "검지", "중지", "약지", "새끼"]];
+    getFlexes() {
+      var list = [["날짜",  "검지", "중지", "약지"]];
 
       for (var i in this.pressures) {
         var tmp = [];
         tmp.push(this.pressures[i].date.substr(0, 10));
-        tmp.push(this.pressures[i].thumb);
         tmp.push(this.pressures[i].indexFinger);
         tmp.push(this.pressures[i].middleFinger);
         tmp.push(this.pressures[i].ringFinger);
-        tmp.push(this.pressures[i].littleFinger);
         list.push(tmp);
       }
       return list;

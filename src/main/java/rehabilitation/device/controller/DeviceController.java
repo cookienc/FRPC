@@ -1,7 +1,6 @@
 package rehabilitation.device.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +32,12 @@ public class DeviceController {
 	public ResponseEntity<List<PressureResponse>> getLineGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
 		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		return ResponseEntity.ok().body(deviceService.getLineGraph(localDateTime));
+	}
+
+	@GetMapping("/line-graph/flex")
+	public ResponseEntity<List<PressureResponse>> getLineFlexGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
+		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		return ResponseEntity.ok().body(deviceService.getLineFlexGraph(localDateTime));
 	}
 
 	@GetMapping("/list")
