@@ -5,10 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rehabilitation.device.controller.converter.MeasureDateConverter;
-import rehabilitation.device.controller.converter.PressureResponseConverter;
+import rehabilitation.device.controller.converter.ResponseConverter;
 import rehabilitation.device.model.Finger;
 import rehabilitation.device.model.Flex;
 import rehabilitation.device.model.Pressure;
+import rehabilitation.device.model.dto.FlexResponse;
 import rehabilitation.device.model.dto.MeasureDate;
 import rehabilitation.device.model.dto.PressureResponse;
 import rehabilitation.device.model.dto.SensorBarGraphResponse;
@@ -78,7 +79,7 @@ public class DeviceService {
 		Pressure latestPressure = pressures.get(pressures.size() - 1);
 		LocalDateTime pressureDate = LocalDateTime.of(latestPressure.getCreatedAt().toLocalDate(), LocalTime.of(0, 0, 0));
 
-		responses.add(PressureResponseConverter.of(latestPressure.getId(), finger, pressureDate));
+		responses.add(ResponseConverter.ofPressureResponse(latestPressure.getId(), finger, pressureDate));
 	}
 
 	private List<Pressure> getPressures(LocalDateTime date, int i) {
@@ -115,8 +116,8 @@ public class DeviceService {
 		return dates;
 	}
 
-	public List<PressureResponse> getLineFlexGraph(LocalDateTime date) {
-		List<PressureResponse> responses = new ArrayList<>();
+	public List<FlexResponse> getLineFlexGraph(LocalDateTime date) {
+		List<FlexResponse> responses = new ArrayList<>();
 
 		for (int i = 0; i < 5; i++) {
 			List<Flex> pressures = getFlexPressures(date, i);
@@ -124,7 +125,7 @@ public class DeviceService {
 		}
 
 		return responses.stream()
-				.sorted(comparing(PressureResponse::getDate))
+				.sorted(comparing(FlexResponse::getDate))
 				.collect(toList());
 	}
 
@@ -132,7 +133,7 @@ public class DeviceService {
 		return flexRepository.findByCreatedAtBetween(getStartDate(date, i), getEndDate(date, i));
 	}
 
-	private void addDataFlex(List<PressureResponse> responses, List<Flex> flexes) {
+	private void addDataFlex(List<FlexResponse> responses, List<Flex> flexes) {
 		if (flexes.isEmpty()) {
 			return;
 		}
@@ -141,7 +142,7 @@ public class DeviceService {
 		Flex latestFlex = flexes.get(flexes.size() - 1);
 		LocalDateTime flexDate = LocalDateTime.of(latestFlex.getCreatedAt().toLocalDate(), LocalTime.of(0, 0, 0));
 
-		responses.add(PressureResponseConverter.of(latestFlex.getId(), finger, flexDate));
+		responses.add(ResponseConverter.ofFlexResponse(latestFlex.getId(), finger, flexDate));
 	}
 
 	private Finger getAverageFlex(List<Flex> flexes) {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>최근 5일 동안 곡률반 측정 현황</h1>
+    <h1>최근 5일 동안 곡률반경 측정 현황</h1>
     <div v-if="getFlexes().length > 1">
       <GChart
       id="chart"
@@ -30,7 +30,7 @@ export default {
 
   data() {
     return {
-      pressures: [],
+      flexes: [],
 
       chartOptions: {
         hAxis: {
@@ -39,6 +39,10 @@ export default {
         },
         vAxis: {
           title: "곡률반경(cm)",
+          minValue: 1.5,
+          viewWindow: {
+            min: 1.5,
+          }
         },
       },
     };
@@ -64,7 +68,7 @@ export default {
         })
         .then((res) => {
           for (var i = 0; i < res.data.length; i++) {
-            this.pressures.push(res.data[i]);
+            this.flexes.push(res.data[i]);
           }
         })
         .catch((err) => console.log(err));
@@ -73,12 +77,12 @@ export default {
     getFlexes() {
       var list = [["날짜",  "검지", "중지", "약지"]];
 
-      for (var i in this.pressures) {
+      for (var i in this.flexes) {
         var tmp = [];
-        tmp.push(this.pressures[i].date.substr(0, 10));
-        tmp.push(this.pressures[i].indexFinger);
-        tmp.push(this.pressures[i].middleFinger);
-        tmp.push(this.pressures[i].ringFinger);
+        tmp.push(this.flexes[i].date.substr(0, 10));
+        tmp.push(this.flexes[i].indexFinger);
+        tmp.push(this.flexes[i].middleFinger);
+        tmp.push(this.flexes[i].ringFinger);
         list.push(tmp);
       }
       return list;

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import rehabilitation.device.model.dto.FlexResponse;
 import rehabilitation.device.model.dto.MeasureDate;
 import rehabilitation.device.model.dto.PressureResponse;
 import rehabilitation.device.model.dto.SensorBarGraphResponse;
@@ -35,7 +36,7 @@ public class DeviceController {
 	}
 
 	@GetMapping("/line-graph/flex")
-	public ResponseEntity<List<PressureResponse>> getLineFlexGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
+	public ResponseEntity<List<FlexResponse>> getLineFlexGraph(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String date) {
 		LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		return ResponseEntity.ok().body(deviceService.getLineFlexGraph(localDateTime));
 	}
