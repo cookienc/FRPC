@@ -5,7 +5,7 @@ spring:
         classpath: /META-INF/resources/, /resources/, /static/, /public/, /static/dist
 
   datasource:
-    url: jdbc:mysql://garak.c2smiwxk0sg3.ap-northeast-2.rds.amazonaws.com:3306/garak?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://garak.czzbubqkgnqz.ap-northeast-2.rds.amazonaws.com:3306/garak?serverTimezone=Asia/Seoul
     username: admin
     password: 12qw12qw
     driver-class-name: com.mysql.cj.jdbc.Driver
