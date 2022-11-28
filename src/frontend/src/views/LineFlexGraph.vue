@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>최근 5일간  곡률반경 측정 현황</h1>
+    <h1>최근 5일간 곡률반경 측정 현황</h1>
     <div v-if="getFlexes().length > 1">
       <GChart
       id="chart"
